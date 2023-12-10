@@ -1,11 +1,11 @@
 CREATE TABLE agendamento
 (
     id             BIGINT AUTO_INCREMENT NOT NULL,
-    data           datetime              NULL,
-    pet_id         BIGINT                NULL,
-    servico_id     BIGINT                NULL,
-    funcionario_id BIGINT                NULL,
-    local_id       BIGINT                NULL,
+    data           datetime              NOT NULL,
+    pet_id         BIGINT                NOT NULL,
+    servico_id     BIGINT                NOT NULL,
+    funcionario_id BIGINT                NOT NULL,
+    local_id       BIGINT                NOT NULL,
     observacao     VARCHAR(255)          NULL,
     CONSTRAINT pk_agendamento PRIMARY KEY (id)
 );
@@ -13,9 +13,9 @@ CREATE TABLE agendamento
 CREATE TABLE cliente
 (
     id       BIGINT AUTO_INCREMENT NOT NULL,
-    nome     VARCHAR(255)          NULL,
-    contato  VARCHAR(255)          NULL,
-    endereco VARCHAR(255)          NULL,
+    nome     VARCHAR(64)           NOT NULL,
+    contato  VARCHAR(128)          NOT NULL,
+    endereco VARCHAR(128)          NOT NULL,
     CONSTRAINT pk_cliente PRIMARY KEY (id)
 );
 
@@ -28,35 +28,35 @@ CREATE TABLE cliente_pets
 CREATE TABLE funcionario
 (
     id            BIGINT AUTO_INCREMENT NOT NULL,
-    nome          VARCHAR(255)          NULL,
-    contato       VARCHAR(255)          NULL,
-    endereco      VARCHAR(255)          NULL,
-    especialidade VARCHAR(255)          NULL,
-    status        BIT(1)                NULL,
+    nome          VARCHAR(64)           NOT NULL,
+    contato       VARCHAR(128)          NOT NULL,
+    endereco      VARCHAR(128)          NOT NULL,
+    especialidade VARCHAR(64)           NOT NULL,
+    status        BIT(1)                NOT NULL,
     CONSTRAINT pk_funcionario PRIMARY KEY (id)
 );
 
 CREATE TABLE local
 (
     id         BIGINT AUTO_INCREMENT NOT NULL,
-    nome       VARCHAR(255)          NULL,
-    descricao  VARCHAR(255)          NULL,
-    capacidade INT                   NULL,
-    endereco   VARCHAR(255)          NULL,
+    nome       VARCHAR(64)           NOT NULL,
+    descricao  VARCHAR(64)           NOT NULL,
+    capacidade INT                   NOT NULL,
+    endereco   VARCHAR(128)          NULL,
     CONSTRAINT pk_local PRIMARY KEY (id)
 );
 
 CREATE TABLE pet
 (
     id          BIGINT AUTO_INCREMENT NOT NULL,
-    nome        VARCHAR(255)          NULL,
-    especie     VARCHAR(255)          NULL,
-    raca        VARCHAR(255)          NULL,
-    tipo_pelo   VARCHAR(255)          NULL,
-    cor         VARCHAR(255)          NULL,
-    peso_gramas BIGINT                NULL,
-    tamanho_cm  BIGINT                NULL,
-    nacimento   date                  NULL,
+    nome        VARCHAR(64)           NOT NULL,
+    especie     VARCHAR(32)           NOT NULL,
+    raca        VARCHAR(32)           NOT NULL,
+    tipo_pelo   VARCHAR(32)           NOT NULL,
+    cor         VARCHAR(32)           NOT NULL,
+    peso_gramas BIGINT                NOT NULL,
+    tamanho_cm  BIGINT                NOT NULL,
+    nascimento  date                  NOT NULL,
     observacao  VARCHAR(255)          NULL,
     CONSTRAINT pk_pet PRIMARY KEY (id)
 );
@@ -64,10 +64,10 @@ CREATE TABLE pet
 CREATE TABLE servico
 (
     id             BIGINT AUTO_INCREMENT NOT NULL,
-    nome           VARCHAR(255)          NULL,
-    descricao      VARCHAR(255)          NULL,
-    valor_centavos BIGINT                NULL,
-    tempo_segundos INT                   NULL,
+    nome           VARCHAR(64)           NOT NULL,
+    descricao      VARCHAR(255)          NOT NULL,
+    valor_centavos BIGINT                NOT NULL,
+    tempo_segundos INT                   NOT NULL,
     CONSTRAINT pk_servico PRIMARY KEY (id)
 );
 
