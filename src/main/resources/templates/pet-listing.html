@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common :: common-head(${pageTitle})"></head>
+<body>
+<nav th:replace="common :: common-navbar"></nav>
+
+<div class="container my-5">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Id#</th>
+            <th scope="col">Nome do Pet</th>
+            <th scope="col">Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pet : ${pets}">
+            <th scope="row" th:text="${pet.id}"></th>
+            <td th:text="${pet.nome}">Mark</td>
+            <td class="d-flex">
+                <a class="btn btn-info mr-5" th:href="@{/pets/view/{id}(id=${pet.id})}">Ver detalhes</a>
+                <a class="btn btn-warning mr-5" th:href="@{/pets/edit/{id}(id=${pet.id})}">Editar</a>
+                <a class="btn btn-danger" >
+                    <form th:action="@{/pets/delete/{id}(id=${pet.id})}" method="post">
+                        <input type="hidden" name="_method" value="delete" />
+                        <button type="submit" class="btn btn-danger">Deletar</button>
+                    </form>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<div th:replace="common :: common-bootstrapjs"></div>
+</body>
+</html>
