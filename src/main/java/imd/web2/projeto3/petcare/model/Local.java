@@ -1,6 +1,7 @@
 package imd.web2.projeto3.petcare.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -20,10 +21,12 @@ public class Local {
     private Long id;
 
     @NotNull(message = Mensagens.NOTNULL)
+    @NotBlank(message = Mensagens.NOTNULL)
     @Size(max = 64, message = Mensagens.MAX)
     private String nome;
 
     @NotNull(message = Mensagens.NOTNULL)
+    @NotBlank(message = Mensagens.NOTNULL)
     @Size(max = 64, message = Mensagens.MAX)
     private String descricao;
 

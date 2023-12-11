@@ -4,6 +4,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -22,14 +23,17 @@ public class Pessoa {
     private Long id;
 
     @NotNull(message = Mensagens.NOTNULL)
+    @NotBlank(message = Mensagens.NOTNULL)
     @Size(max = 64, message = Mensagens.MAX)
     private String nome;
 
     @NotNull(message = Mensagens.NOTNULL)
+    @NotBlank(message = Mensagens.NOTNULL)
     @Size(max = 128, message = Mensagens.MAX)
     private String contato;
 
     @NotNull(message = Mensagens.NOTNULL)
+    @NotBlank(message = Mensagens.NOTNULL)
     @Size(max = 128, message = Mensagens.MAX)
     private String endereco;
 }

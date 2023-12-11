@@ -1,7 +1,9 @@
 package imd.web2.projeto3.petcare.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,22 +24,27 @@ public class Pet {
     private Long id;
 
     @NotNull(message = Mensagens.NOTNULL)
+    @NotBlank(message = Mensagens.NOTNULL)
     @Size(max = 64, message = Mensagens.MAX)
     private String Nome;
 
     @NotNull(message = Mensagens.NOTNULL)
+    @NotBlank(message = Mensagens.NOTNULL)
     @Size(max = 32, message = Mensagens.MAX)
     private String especie;
 
     @NotNull(message = Mensagens.NOTNULL)
+    @NotBlank(message = Mensagens.NOTNULL)
     @Size(max = 32, message = Mensagens.MAX)
     private String raca;
 
     @NotNull(message = Mensagens.NOTNULL)
+    @NotBlank(message = Mensagens.NOTNULL)
     @Size(max = 32, message = Mensagens.MAX)
     private String tipoPelo;
 
     @NotNull(message = Mensagens.NOTNULL)
+    @NotBlank(message = Mensagens.NOTNULL)
     @Size(max = 32, message = Mensagens.MAX)
     private String cor;
 
@@ -47,6 +54,7 @@ public class Pet {
     @NotNull(message = Mensagens.NOTNULL)
     private Long tamanhoCm;
 
+    @Past
     @NotNull(message = Mensagens.NOTNULL)
     private LocalDate nascimento;
 
