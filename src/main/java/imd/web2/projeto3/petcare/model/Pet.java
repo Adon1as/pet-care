@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 @Table(name = "pet")
 @Entity(name = "Pet")
@@ -62,7 +63,7 @@ public class Pet {
     private String observacao;
 
     public int getIdade(){
-        return nascimento.compareTo(LocalDate.now());
+        return Period.between(nascimento, LocalDate.now()).getYears();
     }
 
 }
