@@ -14,48 +14,56 @@
         <div class="mb-3">
             <label for="nome" class="form-label">Nome</label>
             <input type="text" class="form-control" id="nome" name="nome" th:field="*{nome}" th:disabled="${viewMode}">
-            <div class="text-danger" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div> <!-- TODO: FIX ERROR NOT SHOWING -->
+            <small class="form-text text-muted" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Nome Error</small>
         </div>
 
         <div class="mb-3">
             <label for="especie" class="form-label">Espécie</label>
             <input type="text" class="form-control" id="especie" name="especie" th:field="*{especie}" th:disabled="${viewMode}">
+            <small class="form-text text-muted" th:if="${#fields.hasErrors('especie')}" th:errors="*{especie}">Error</small>
         </div>
 
         <div class="mb-3">
             <label for="raca" class="form-label">Raça</label>
             <input type="text" class="form-control" id="raca" name="raca" th:field="*{raca}" th:disabled="${viewMode}">
+            <small class="form-text text-muted" th:if="${#fields.hasErrors('raca')}" th:errors="*{raca}">Error</small>
         </div>
 
         <div class="mb-3">
             <label for="tipoPelo" class="form-label">Tipo de Pelo</label>
             <input type="text" class="form-control" id="tipoPelo" name="tipoPelo" th:field="*{tipoPelo}" th:disabled="${viewMode}">
+            <small class="form-text text-muted" th:if="${#fields.hasErrors('tipoPelo')}" th:errors="*{tipoPelo}">Error</small>
         </div>
 
         <div class="mb-3">
             <label for="cor" class="form-label">Cor</label>
             <input type="text" class="form-control" id="cor" name="cor" th:field="*{cor}" th:disabled="${viewMode}">
+            <small class="form-text text-muted" th:if="${#fields.hasErrors('cor')}" th:errors="*{cor}">Error</small>
         </div>
 
         <div class="mb-3">
             <label for="pesoGramas" class="form-label">Peso (g)</label>
             <input type="number" class="form-control" id="pesoGramas" name="pesoGramas" th:field="*{pesoGramas}" th:disabled="${viewMode}">
+            <small class="form-text text-muted" th:if="${#fields.hasErrors('pesoGramas')}" th:errors="*{pesoGramas}">Error</small>
         </div>
 
         <div class="mb-3">
             <label for="tamanhoCm" class="form-label">Tamanho (cm)</label>
             <input type="number" class="form-control" id="tamanhoCm" name="tamanhoCm" th:field="*{tamanhoCm}" th:disabled="${viewMode}">
+            <small class="form-text text-muted" th:if="${#fields.hasErrors('tamanhoCm')}" th:errors="*{tamanhoCm}">Error</small>
         </div>
 
         <div class="mb-3">
             <label for="nascimento" class="form-label">Data de Nascimento</label>
             <input type="date" class="form-control" id="nascimento" name="nascimento" th:value="${#temporals.format(pet.nascimento, 'yyyy-MM-dd')}" th:disabled="${viewMode}">
+            <small class="form-text text-muted" th:if="${#fields.hasErrors('nascimento')}" th:errors="*{nascimento}">Error</small>
 
         </div>
 
         <div class="mb-3">
             <label for="observacao" class="form-label">OBS</label>
             <textarea class="form-control" id="observacao" name="observacao" rows="3" th:field="*{observacao}" th:disabled="${viewMode}"></textarea>
+            <small class="form-text text-muted" th:if="${#fields.hasErrors('observacao')}" th:errors="*{observacao}">Error</small>
         </div>
 
         <div class="d-flex">

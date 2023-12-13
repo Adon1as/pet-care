@@ -17,7 +17,7 @@
         <tr th:each="pet : ${pets}">
             <th scope="row" th:text="${pet.id}"></th>
             <td th:text="${pet.nome}">Mark</td>
-            <td class="d-flex">
+            <td class="d-flex justify-content-around">
                 <a class="btn btn-info mr-5" th:href="@{/pets/view/{id}(id=${pet.id})}">Ver detalhes</a>
                 <a class="btn btn-warning mr-5" th:href="@{/pets/edit/{id}(id=${pet.id})}">Editar</a>
                 <a class="btn btn-danger" >
