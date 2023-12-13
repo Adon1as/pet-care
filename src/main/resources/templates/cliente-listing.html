@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common :: common-head(${pageTitle})"></head>
+<body>
+<nav th:replace="common :: common-navbar"></nav>
+
+<div class="container my-5">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#Id</th>
+            <th scope="col">Nome do Cliente</th>
+            <th scope="col">Contato</th>
+            <th scope="col">Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cliente : ${clientes}">
+            <th scope="row" th:text="${cliente.id}"></th>
+            <td th:text="${cliente.nome}">Mark</td>
+            <td th:text="${cliente.contato}">+558499999999</td>
+            <td class="d-flex justify-content-around">
+                <a class="btn btn-info mr-5" th:href="@{/clientes/view/{id}(id=${cliente.id})}">Ver detalhes</a>
+                <a class="btn btn-warning mr-5" th:href="@{/clientes/edit/{id}(id=${cliente.id})}">Editar</a>
+                <a class="btn btn-danger" >
+                    <form th:action="@{/clientes/delete/{id}(id=${cliente.id})}" method="post">
+                        <input type="hidden" name="_method" value="delete" />
+                        <button type="submit" class="btn btn-danger">Deletar</button>
+                    </form>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<div th:replace="common :: common-bootstrapjs"></div>
+</body>
+</html>
