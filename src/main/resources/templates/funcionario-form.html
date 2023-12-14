@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common :: common-head(${pageTitle})"></head>
+<body>
+
+<nav th:replace="common :: common-navbar"></nav>
+
+<div class="container my-5">
+    <a th:href="@{/funcionarios}">
+        <- Voltar
+    </a>
+    <h1 th:text="${funcionario.id != null} ? (${viewMode} ? 'Detalhes do Funcionario' : 'Editar Funcionarios') : 'Adicionar Funcionarios'"></h1>
+    <form th:action="${funcionario.id != null && !viewMode} ? @{/funcionarios/edit/{id}(id=${funcionario.id})} : @{/funcionarios/add}" th:object="${funcionario}" method="post" class="mt-3">
+        <!-- Nome Field -->
+        <div class="form-group mb-3">
+            <label for="nome">Nome</label>
+            <input type="text" class="form-control" id="nome" th:field="*{nome}" th:disabled="${viewMode}">
+            <small class="form-text text-muted" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Nome Error</small>
+        </div>
+
+        <!-- Contato Field -->
+        <div class="form-group mb-3">
+            <label for="contato">Contato</label>
+            <input type="tel" class="form-control" id="contato" th:field="*{contato}" th:disabled="${viewMode}">
+            <small class="form-text text-muted" th:if="${#fields.hasErrors('contato')}" th:errors="*{contato}">Contato Error</small>
+        </div>
+
+        <!-- Endereco Field -->
+        <div class="form-group mb-3">
+            <label for="endereco">Endereço</label>
+            <input type="text" class="form-control" id="endereco" th:field="*{endereco}" th:disabled="${viewMode}">
+            <small class="form-text text-muted" th:if="${#fields.hasErrors('endereco')}" th:errors="*{endereco}">Endereço Error</small>
+        </div>
+
+        <!-- ESPECIALIDADE -->
+        <div class="form-group mb-3">
+            <label for="especialidade">Especialidade</label>
+            <select class="form-control" id="especialidade" th:field="*{especialidade}" th:disabled="${viewMode}">
+                <option value="">--Selecione uma Especialidade--</option>
+                <option th:each="especialidade : ${especialidades}"
+                        th:value="${especialidade}"
+                        th:text="${especialidade}">
+                    Nome da Especialidade
+                </option>
+            </select>
+        </div>
+
+        <!-- Status -->
+        <div class="form-group form-check mb-3">
+            <input type="checkbox" class="form-check-input" id="status" th:field="*{status}" th:disabled="${viewMode}">
+            <label class="form-check-label" for="status">Ativo</label>
+        </div>
+
+        <div class="d-flex">
+            <div th:if="!${viewMode}">
+                <button type="submit" th:text="${funcionario.id != null} ? 'Atualizar' : 'Adicionar'" class="btn btn-primary"></button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div th:replace="common :: common-bootstrapjs"></div>
+</body>
+</html>
