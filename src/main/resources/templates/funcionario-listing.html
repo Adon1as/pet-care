@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common :: common-head(${pageTitle})"></head>
+<body>
+<nav th:replace="common :: common-navbar"></nav>
+
+<div class="container my-5">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#Id</th>
+            <th scope="col">Nome do Funcionario</th>
+            <th scope="col">Contato</th>
+            <th scope="col">Especialidade</th>
+            <th scope="col">Status</th>
+            <th scope="col">Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="funcionario : ${funcionarios}">
+            <th scope="row" th:text="${funcionario.id}"></th>
+            <td th:text="${funcionario.nome}">Mark</td>
+            <td th:text="${funcionario.contato}">+558499999999</td>
+            <td th:text="${funcionario.especialidade}">+558499999999</td>
+            <td th:text="${funcionario.status} ? 'Ativo' : 'Inativo'">Ativo/Inativo</td>
+            <td class="d-flex justify-content-around">
+                <a class="btn btn-info mr-5" th:href="@{/funcionarios/view/{id}(id=${funcionario.id})}">Ver detalhes</a>
+                <a class="btn btn-warning mr-5" th:href="@{/funcionarios/edit/{id}(id=${funcionario.id})}">Editar</a>
+                <a class="btn btn-danger" >
+                    <form th:action="@{/funcionarios/delete/{id}(id=${funcionario.id})}" method="post">
+                        <input type="hidden" name="_method" value="delete" />
+                        <button type="submit" class="btn btn-danger">Deletar</button>
+                    </form>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<div th:replace="common :: common-bootstrapjs"></div>
+</body>
+</html>

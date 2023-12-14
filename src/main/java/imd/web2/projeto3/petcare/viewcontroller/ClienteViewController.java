@@ -14,16 +14,16 @@ import jakarta.validation.Valid;
 @Controller
 public class ClienteViewController {
 
-    private final ClienteRepository petRepository;
+    private final ClienteRepository clienteRepository;
 
     @Autowired
-    public ClienteViewController(ClienteRepository petRepository) {
-        this.petRepository = petRepository;
+    public ClienteViewController(ClienteRepository clienteRepository) {
+        this.clienteRepository = clienteRepository;
     }
 
     @GetMapping("/clientes")
     public String listclientes(Model model) {
-        model.addAttribute("clientes", petRepository.findAll());
+        model.addAttribute("clientes", clienteRepository.findAll());
         model.addAttribute("pageTitle", "Listar clientes");
         return "cliente-listing";
     }
@@ -44,13 +44,13 @@ public class ClienteViewController {
             model.addAttribute("viewMode", false);
             return "cliente-form";
         }
-        petRepository.save(cliente);
+        clienteRepository.save(cliente);
 
         return "redirect:/clientes";
     }
     @GetMapping("/clientes/edit/{id}")
     public String showEditClienteForm(@PathVariable Long id, Model model) {
-        Cliente cliente = petRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Cliente inválido com id: " + id));
+        Cliente cliente = clienteRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Cliente inválido com id: " + id));
         model.addAttribute("cliente", cliente);
         model.addAttribute("pageTitle", "Editar Cliente");
         model.addAttribute("viewMode", false);
@@ -65,13 +65,13 @@ public class ClienteViewController {
             return "cliente-form";
         }
         cliente.setId(id);
-        petRepository.save(cliente);
-        return "redirect:/cliente";
+        clienteRepository.save(cliente);
+        return "redirect:/clientes";
     }
 
     @GetMapping("/clientes/view/{id}")
     public String viewCliente(@PathVariable Long id, Model model) {
-        Cliente cliente = petRepository.findById(id)
+        Cliente cliente = clienteRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Cliente inválido com id: " + id));
         model.addAttribute("cliente", cliente);
         model.addAttribute("viewMode", true);
@@ -80,7 +80,7 @@ public class ClienteViewController {
 
     @PostMapping("/clientes/delete/{id}")
     public String deleteCliente(@PathVariable Long id) {
-        petRepository.deleteById(id);
+        clienteRepository.deleteById(id);
         return "redirect:/clientes";
     }
 
