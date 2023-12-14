@@ -8,12 +8,12 @@
 </head>
 <body>
 <nav th:fragment="common-navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container justify-content-end">
+    <div class="container">
         <a class="navbar-brand" href="#">Pet Care</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="flex-grow: 0">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link" href="#">Agendamento</a>
@@ -43,6 +43,15 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" th:href="@{/funcionarios}">Listar Funcionários</a></li>
                         <li><a class="dropdown-item" th:href="@{/funcionarios/add}">Cadastrar Funcionário</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="servicosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Serviços
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" th:href="@{/servicos}">Listar Serviços</a></li>
+                        <li><a class="dropdown-item" th:href="@{/servicos/add}">Cadastrar Serviço</a></li>
                     </ul>
                 </li>
 
