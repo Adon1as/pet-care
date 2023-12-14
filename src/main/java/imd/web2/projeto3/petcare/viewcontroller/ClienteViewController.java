@@ -66,7 +66,7 @@ public class ClienteViewController {
         }
         cliente.setId(id);
         clienteRepository.save(cliente);
-        return "redirect:/cliente";
+        return "redirect:/clientes";
     }
 
     @GetMapping("/clientes/view/{id}")
