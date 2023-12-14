@@ -24,17 +24,20 @@ public class AuthenticationController {
     private AuthenticationManager authenticationManager;
     @Autowired
     private UserRepository repository;
-    @Autowired
-    private TokenService tokenService;
+
+   /* @Autowired
+    private TokenService tokenService;*/
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid AuthenticationDTO data){
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
+        System.out.println(data.password());
 
-        var token = tokenService.generateToken((User) auth.getPrincipal());
+       // var token = tokenService.generateToken((User) auth.getPrincipal());
 
-        return ResponseEntity.ok(new ResponseDTO(token));
+        //return ResponseEntity.ok(new ResponseDTO(token));
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/register")
@@ -42,6 +45,7 @@ public class AuthenticationController {
         if(this.repository.findByLogin(data.login()) != null) return ResponseEntity.badRequest().build();
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
+        System.out.println( "aqui " +  data.role().getRole());
         User newUser = new User(data.login(), encryptedPassword, data.role());
 
         this.repository.save(newUser);
