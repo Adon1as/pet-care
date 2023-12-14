@@ -1,7 +1,7 @@
-package imd.web2.projeto3.petcare.viewcontroller;
+package imd.web2.projeto3.petcare.controller.view;
 
 import imd.web2.projeto3.petcare.model.Funcionario;
-import imd.web2.projeto3.petcare.repository.FuncionarioRepository;
+import imd.web2.projeto3.petcare.service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,17 +18,17 @@ import java.util.List;
 @Controller
 public class FuncionarioViewController {
 
-    private final FuncionarioRepository funcionarioRepository;
+    private final FuncionarioService funcionarioService;
     private List<String> especialidades = Arrays.asList("Auxiliar de Limpeza", "Veterinário", "Treinador", "Atendente");
 
     @Autowired
-    public FuncionarioViewController(FuncionarioRepository funcionarioRepository) {
-        this.funcionarioRepository = funcionarioRepository;
+    public FuncionarioViewController(FuncionarioService funcionarioService) {
+        this.funcionarioService = funcionarioService;
     }
 
     @GetMapping("/funcionarios")
     public String listFuncionarios(Model model) {
-        model.addAttribute("funcionarios", funcionarioRepository.findAll());
+        model.addAttribute("funcionarios", funcionarioService.findAll());
         model.addAttribute("pageTitle", "Listar funcionarios");
         return "funcionario-listing";
     }
@@ -51,14 +51,14 @@ public class FuncionarioViewController {
             model.addAttribute("viewMode", false);
             return "funcionario-form";
         }
-        funcionarioRepository.save(funcionario);
+        funcionarioService.save(funcionario);
 
         return "redirect:/funcionarios";
     }
     @GetMapping("/funcionarios/edit/{id}")
     public String showEditFuncionarioForm(@PathVariable Long id, Model model) {
         model.addAttribute("especialidades", especialidades);
-        Funcionario funcionario = funcionarioRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Funcionario inválido com id: " + id));
+        Funcionario funcionario = funcionarioService.findById(id).orElseThrow(() -> new IllegalArgumentException("Funcionario inválido com id: " + id));
         model.addAttribute("funcionario", funcionario);
         model.addAttribute("pageTitle", "Editar Funcionario");
         model.addAttribute("viewMode", false);
@@ -73,13 +73,13 @@ public class FuncionarioViewController {
             return "funcionario-form";
         }
         funcionario.setId(id);
-        funcionarioRepository.save(funcionario);
+        funcionarioService.save(funcionario);
         return "redirect:/funcionarios";
     }
 
     @GetMapping("/funcionarios/view/{id}")
     public String viewFuncionario(@PathVariable Long id, Model model) {
-        Funcionario funcionario = funcionarioRepository.findById(id)
+        Funcionario funcionario = funcionarioService.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Funcionario inválido com id: " + id));
         model.addAttribute("funcionario", funcionario);
         model.addAttribute("viewMode", true);
@@ -88,7 +88,7 @@ public class FuncionarioViewController {
 
     @PostMapping("/funcionarios/delete/{id}")
     public String deleteFuncionario(@PathVariable Long id) {
-        funcionarioRepository.deleteById(id);
+        funcionarioService.deleteById(id);
         return "redirect:/funcionarios";
     }
 

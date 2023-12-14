@@ -24,46 +24,51 @@ public class Pet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = Mensagens.NOTNULL)
-    @NotBlank(message = Mensagens.NOTNULL)
-    @Size(max = 64, message = Mensagens.MAX)
+    @NotNull(message = Mensagem.NOTNULL)
+    @NotBlank(message = Mensagem.NOTNULL)
+    @Size(max = 64, message = Mensagem.MAX)
     private String Nome;
 
-    @NotNull(message = Mensagens.NOTNULL)
-    @NotBlank(message = Mensagens.NOTNULL)
-    @Size(max = 32, message = Mensagens.MAX)
+    @NotNull(message = Mensagem.NOTNULL)
+    @NotBlank(message = Mensagem.NOTNULL)
+    @Size(max = 32, message = Mensagem.MAX)
     private String especie;
 
-    @NotNull(message = Mensagens.NOTNULL)
-    @NotBlank(message = Mensagens.NOTNULL)
-    @Size(max = 32, message = Mensagens.MAX)
+    @NotNull(message = Mensagem.NOTNULL)
+    @NotBlank(message = Mensagem.NOTNULL)
+    @Size(max = 32, message = Mensagem.MAX)
     private String raca;
 
-    @NotNull(message = Mensagens.NOTNULL)
-    @NotBlank(message = Mensagens.NOTNULL)
-    @Size(max = 32, message = Mensagens.MAX)
+    @NotNull(message = Mensagem.NOTNULL)
+    @NotBlank(message = Mensagem.NOTNULL)
+    @Size(max = 32, message = Mensagem.MAX)
     private String tipoPelo;
 
-    @NotNull(message = Mensagens.NOTNULL)
-    @NotBlank(message = Mensagens.NOTNULL)
-    @Size(max = 32, message = Mensagens.MAX)
+    @NotNull(message = Mensagem.NOTNULL)
+    @NotBlank(message = Mensagem.NOTNULL)
+    @Size(max = 32, message = Mensagem.MAX)
     private String cor;
 
-    @NotNull(message = Mensagens.NOTNULL)
+    @NotNull(message = Mensagem.NOTNULL)
     private Long pesoGramas;
 
-    @NotNull(message = Mensagens.NOTNULL)
+    @NotNull(message = Mensagem.NOTNULL)
     private Long tamanhoCm;
 
     @Past
-    @NotNull(message = Mensagens.NOTNULL)
+    @NotNull(message = Mensagem.NOTNULL)
     private LocalDate nascimento;
 
-    @Size(max = 255, message = Mensagens.MAX)
+    @Size(max = 255, message = Mensagem.MAX)
     private String observacao;
+
+    @Transient
+    private Long responsavelId;
 
     public int getIdade(){
         return Period.between(nascimento, LocalDate.now()).getYears();
     }
+
+
 
 }

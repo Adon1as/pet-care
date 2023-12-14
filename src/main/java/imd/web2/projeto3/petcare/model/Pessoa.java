@@ -22,18 +22,18 @@ public class Pessoa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = Mensagens.NOTNULL)
-    @NotBlank(message = Mensagens.NOTNULL)
-    @Size(max = 64, message = Mensagens.MAX)
+    @NotNull(message = Mensagem.NOTNULL)
+    @NotBlank(message = Mensagem.NOTNULL)
+    @Size(max = 64, message = Mensagem.MAX)
     private String nome;
 
-    @NotNull(message = Mensagens.NOTNULL)
-    @NotBlank(message = Mensagens.NOTNULL)
-    @Size(max = 128, message = Mensagens.MAX)
+    @NotNull(message = Mensagem.NOTNULL)
+    @NotBlank(message = Mensagem.NOTNULL)
+    @Size(max = 128, message = Mensagem.MAX)
     private String contato;
 
-    @NotNull(message = Mensagens.NOTNULL)
-    @NotBlank(message = Mensagens.NOTNULL)
-    @Size(max = 128, message = Mensagens.MAX)
+    @NotNull(message = Mensagem.NOTNULL)
+    @NotBlank(message = Mensagem.NOTNULL)
+    @Size(max = 128, message = Mensagem.MAX)
     private String endereco;
 }

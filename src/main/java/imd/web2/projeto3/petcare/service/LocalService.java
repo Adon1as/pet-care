@@ -1,4 +1,4 @@
-package imd.web2.projeto3.petcare.controller;
+package imd.web2.projeto3.petcare.service;
 
 import imd.web2.projeto3.petcare.model.Local;
 import imd.web2.projeto3.petcare.repository.LocalRepository;
@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = {"/local"} )
-public class LocalController extends GenericController<Local, LocalRepository>{
+public class LocalService extends GenericServe<Local, LocalRepository> {
 
     @Autowired
-    public LocalController(LocalRepository repository){
+    public LocalService(LocalRepository repository){
         super.setDependencies(repository);
     }
 

@@ -18,11 +18,11 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Funcionario extends Pessoa {
 
-    @NotNull(message = Mensagens.NOTNULL)
-    @NotBlank(message = Mensagens.NOTNULL)
-    @Size(max = 64, message = Mensagens.MAX)
+    @NotNull(message = Mensagem.NOTNULL)
+    @NotBlank(message = Mensagem.NOTNULL)
+    @Size(max = 64, message = Mensagem.MAX)
     private String especialidade;
 
-    @NotNull(message = Mensagens.NOTNULL)
+    @NotNull(message = Mensagem.NOTNULL)
     private Boolean status;
 }

@@ -1,7 +1,7 @@
-package imd.web2.projeto3.petcare.viewcontroller;
+package imd.web2.projeto3.petcare.controller.view;
 
 import imd.web2.projeto3.petcare.model.Servico;
-import imd.web2.projeto3.petcare.repository.ServicoRepository;
+import imd.web2.projeto3.petcare.service.ServicoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,16 +15,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class ServicoViewController {
 
-    private final ServicoRepository servicoRepository;
+    private final ServicoService servicoService;
 
     @Autowired
-    public ServicoViewController(ServicoRepository servicoRepository) {
-        this.servicoRepository = servicoRepository;
+    public ServicoViewController(ServicoService servicoService) {
+        this.servicoService = servicoService;
     }
 
     @GetMapping("/servicos")
     public String listservicos(Model model) {
-        model.addAttribute("servicos", servicoRepository.findAll());
+        model.addAttribute("servicos", servicoService.findAll());
         model.addAttribute("pageTitle", "Listar servicos");
         return "servico-listing";
     }
@@ -45,13 +45,13 @@ public class ServicoViewController {
             model.addAttribute("viewMode", false);
             return "servico-form";
         }
-        servicoRepository.save(servico);
+        servicoService.save(servico);
 
         return "redirect:/servicos";
     }
     @GetMapping("/servicos/edit/{id}")
     public String showEditClienteForm(@PathVariable Long id, Model model) {
-        Servico servico = servicoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Servico inválido com id: " + id));
+        Servico servico = servicoService.findById(id).orElseThrow(() -> new IllegalArgumentException("Servico inválido com id: " + id));
         model.addAttribute("servico", servico);
         model.addAttribute("pageTitle", "Editar Servico");
         model.addAttribute("viewMode", false);
@@ -66,13 +66,13 @@ public class ServicoViewController {
             return "servico-form";
         }
         servico.setId(id);
-        servicoRepository.save(servico);
+        servicoService.save(servico);
         return "redirect:/servicos";
     }
 
     @GetMapping("/servicos/view/{id}")
     public String viewCliente(@PathVariable Long id, Model model) {
-        Servico servico = servicoRepository.findById(id)
+        Servico servico = servicoService.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Servico inválido com id: " + id));
         model.addAttribute("servico", servico);
         model.addAttribute("viewMode", true);
@@ -81,7 +81,7 @@ public class ServicoViewController {
 
     @PostMapping("/servicos/delete/{id}")
     public String deleteCliente(@PathVariable Long id) {
-        servicoRepository.deleteById(id);
+        servicoService.deleteById(id);
         return "redirect:/servicos";
     }
 

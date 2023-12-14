@@ -1,7 +1,7 @@
-package imd.web2.projeto3.petcare.viewcontroller;
+package imd.web2.projeto3.petcare.controller.view;
 
 import imd.web2.projeto3.petcare.model.Pet;
-import imd.web2.projeto3.petcare.repository.PetRepository;
+import imd.web2.projeto3.petcare.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,16 +14,16 @@ import jakarta.validation.Valid;
 @Controller
 public class PetViewController {
 
-    private final PetRepository petRepository;
+    private final PetService petService;
 
     @Autowired
-    public PetViewController(PetRepository petRepository) {
-        this.petRepository = petRepository;
+    public PetViewController(PetService petService) {
+        this.petService = petService;
     }
 
     @GetMapping("/pets")
     public String listPets(Model model) {
-        model.addAttribute("pets", petRepository.findAll());
+        model.addAttribute("pets", petService.findAll());
         model.addAttribute("pageTitle", "Listar Pets");
         return "pet-listing";
     }
@@ -44,13 +44,13 @@ public class PetViewController {
             model.addAttribute("viewMode", false);
             return "pet-form";
         }
-        petRepository.save(pet);
+        petService.save(pet);
 
         return "redirect:/pets";
     }
     @GetMapping("/pets/edit/{id}")
     public String showEditPetForm(@PathVariable Long id, Model model) {
-        Pet pet = petRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Pet inválido com id: " + id));
+        Pet pet = petService.findById(id).orElseThrow(() -> new IllegalArgumentException("Pet inválido com id: " + id));
         model.addAttribute("pet", pet);
         model.addAttribute("pageTitle", "Editar Pet");
         model.addAttribute("viewMode", false);
@@ -65,13 +65,13 @@ public class PetViewController {
             return "pet-form";
         }
         pet.setId(id);
-        petRepository.save(pet);
+        petService.save(pet);
         return "redirect:/pets";
     }
 
     @GetMapping("/pets/view/{id}")
     public String viewPet(@PathVariable Long id, Model model) {
-        Pet pet = petRepository.findById(id)
+        Pet pet = petService.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Pet inválido com id: " + id));
         model.addAttribute("pet", pet);
         model.addAttribute("viewMode", true);
@@ -80,7 +80,7 @@ public class PetViewController {
 
     @PostMapping("/pets/delete/{id}")
     public String deletePet(@PathVariable Long id) {
-        petRepository.deleteById(id);
+        petService.deleteById(id);
         return "redirect:/pets";
     }
 

@@ -43,6 +43,6 @@ public class Agendamento {
     @OneToOne
     private Local local;
 
-    @Size(max = 255, message = Mensagens.MAX)
+    @Size(max = 255, message = Mensagem.MAX)
     private String observacao;
 }

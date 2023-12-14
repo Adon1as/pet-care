@@ -1,7 +1,7 @@
-package imd.web2.projeto3.petcare.viewcontroller;
+package imd.web2.projeto3.petcare.controller.view;
 
 import imd.web2.projeto3.petcare.model.Cliente;
-import imd.web2.projeto3.petcare.repository.ClienteRepository;
+import imd.web2.projeto3.petcare.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,16 +14,16 @@ import jakarta.validation.Valid;
 @Controller
 public class ClienteViewController {
 
-    private final ClienteRepository clienteRepository;
+    private final ClienteService clienteService;
 
     @Autowired
-    public ClienteViewController(ClienteRepository clienteRepository) {
-        this.clienteRepository = clienteRepository;
+    public ClienteViewController(ClienteService clienteService) {
+        this.clienteService = clienteService;
     }
 
     @GetMapping("/clientes")
     public String listclientes(Model model) {
-        model.addAttribute("clientes", clienteRepository.findAll());
+        model.addAttribute("clientes", clienteService.findAll());
         model.addAttribute("pageTitle", "Listar clientes");
         return "cliente-listing";
     }
@@ -44,13 +44,13 @@ public class ClienteViewController {
             model.addAttribute("viewMode", false);
             return "cliente-form";
         }
-        clienteRepository.save(cliente);
+        clienteService.save(cliente);
 
         return "redirect:/clientes";
     }
     @GetMapping("/clientes/edit/{id}")
     public String showEditClienteForm(@PathVariable Long id, Model model) {
-        Cliente cliente = clienteRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Cliente inválido com id: " + id));
+        Cliente cliente = clienteService.findById(id).orElseThrow(() -> new IllegalArgumentException("Cliente inválido com id: " + id));
         model.addAttribute("cliente", cliente);
         model.addAttribute("pageTitle", "Editar Cliente");
         model.addAttribute("viewMode", false);
@@ -65,13 +65,13 @@ public class ClienteViewController {
             return "cliente-form";
         }
         cliente.setId(id);
-        clienteRepository.save(cliente);
+        clienteService.save(cliente);
         return "redirect:/clientes";
     }
 
     @GetMapping("/clientes/view/{id}")
     public String viewCliente(@PathVariable Long id, Model model) {
-        Cliente cliente = clienteRepository.findById(id)
+        Cliente cliente = clienteService.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Cliente inválido com id: " + id));
         model.addAttribute("cliente", cliente);
         model.addAttribute("viewMode", true);
@@ -80,7 +80,7 @@ public class ClienteViewController {
 
     @PostMapping("/clientes/delete/{id}")
     public String deleteCliente(@PathVariable Long id) {
-        clienteRepository.deleteById(id);
+        clienteService.deleteById(id);
         return "redirect:/clientes";
     }
 

@@ -20,20 +20,20 @@ public class Servico {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = Mensagens.NOTNULL)
-    @NotBlank(message = Mensagens.NOTNULL)
-    @Size(max = 64, message = Mensagens.MAX)
+    @NotNull(message = Mensagem.NOTNULL)
+    @NotBlank(message = Mensagem.NOTNULL)
+    @Size(max = 64, message = Mensagem.MAX)
     private String nome;
 
-    @NotNull(message = Mensagens.NOTNULL)
-    @NotBlank(message = Mensagens.NOTNULL)
-    @Size(max = 255, message = Mensagens.MAX)
+    @NotNull(message = Mensagem.NOTNULL)
+    @NotBlank(message = Mensagem.NOTNULL)
+    @Size(max = 255, message = Mensagem.MAX)
     private String descricao;
 
-    @NotNull(message = Mensagens.NOTNULL)
+    @NotNull(message = Mensagem.NOTNULL)
     private Long valorCentavos;
 
-    @NotNull(message = Mensagens.NOTNULL)
+    @NotNull(message = Mensagem.NOTNULL)
     private Integer tempoSegundos;
 
 }
