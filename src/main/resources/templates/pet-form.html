@@ -11,6 +11,16 @@
     </a>
     <h1 th:text="${pet.id != null} ? (${viewMode} ? 'Detalhes do Pet' : 'Editar Pet') : 'Adicionar Pet'"></h1>
     <form th:action="${pet.id != null && !viewMode} ? @{/pets/edit/{id}(id=${pet.id})} : @{/pets/add}" th:object="${pet}" method="post">
+
+        <div class="mb-3">
+            <label class="form-label">Responsavel</label>
+            <select class="form-control" id="dropDownList"  th:field="*{responsavelId}" th:disabled="${viewMode}">
+            <option th:if= "${!viewMode}" value="0">Selecione</option>
+            <option th:if= "${viewMode}" th:text="${responsavel}" value="0"></option>
+            <option th:each="responsavel : ${responsaveis}" th:value="${responsavel.getId()}" th:text="${responsavel.getNome()}"  ></option>
+        </select>
+        </div>
+
         <div class="mb-3">
             <label for="nome" class="form-label">Nome</label>
             <input type="text" class="form-control" id="nome" name="nome" th:field="*{nome}" th:disabled="${viewMode}">
