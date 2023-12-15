@@ -14,11 +14,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfigurations {
-    /*@Autowired
-    SecurityFilter securityFilter;*/
+
+    @Autowired
+    SecurityFilter securityFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -31,7 +34,9 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.POST, "/pet-care").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
-                //.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
+                .formLogin(withDefaults()) // Adicionado para configuração de autenticação baseada em formulários
+                .httpBasic(withDefaults()) // Adicionado para configuração de autenticação básica
                 .build();
     }
 
